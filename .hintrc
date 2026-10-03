@@ -1,0 +1,40 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "compat-api/html": [
+      "default",
+      {
+        "ignore": [
+          "iframe[loading]"
+        ]
+      }
+    ],
+    "axe/text-alternatives": [
+      "default",
+      {
+        "frame-title": "off",
+        "image-alt": "off"
+      }
+    ],
+    "no-inline-styles": "off",
+    "disown-opener": "off",
+    "button-type": "off",
+    "axe/parsing": [
+      "default",
+      {
+        "duplicate-id": "off"
+      }
+    ],
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "backdrop-filter",
+          "user-select"
+        ]
+      }
+    ]
+  }
+}

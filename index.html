@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vibrant Bairatwa</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+ .map-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 30px auto 0 auto; /* pushed down by 30px */
+  border-radius: 10px;
+  overflow: hidden;
+}
+@media (max-width: 919px) {
+  .intro {
+    width: 100%;
+    padding: 0.6rem 0.5rem;
+    text-align: left;     /* important: keep left alignment on mobile */
+  }
+
+  .intro h2 {
+    font-size: 1.25rem;
+  }
+
+  .intro p {
+    font-size: 0.97rem;
+  }
+</style>
+</head>
+<body>
+<!-- Header Section -->
+<header class="site-header">
+  <div class="header-container">
+    <div class="title-bar"> 
+     <h1>Vibrant Bairatwa</h1>
+    </div>
+  </div>
+</header>
+<nav class="navbar">
+  <ul class="nav-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="About.html">About</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="Events.html">Events</a></li>
+     <li><a href="Tourist.html">Tourist places</a></li>
+     <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+ 
+  <div class="slider-container">
+    <div class="slider-overlay-text">Stories of Bairatwa</div>
+    <div class="slider" id="slider">
+      <img src="Images/Bairatwa.jpg" alt="Hostel Image 1" />
+      <img src="Images/image1.jpg" alt="Hostel Image 2" />
+      <img src="Images/image31.jpg" alt="Hostel Image 3" />
+      <img src="Images/image4.jpg" alt="Hostel Image 4" />
+    </div>
+
+    <div class="slider-arrow left-arrow">❮</div>
+    <div class="slider-arrow right-arrow">❯</div>
+    <div class="slider-dots">
+      <span class="slider-dot active" data-index="0"></span>
+      <span class="slider-dot" data-index="1"></span>
+      <span class="slider-dot" data-index="2"></span>
+      <span class="slider-dot" data-index="3"></span>
+    </div>
+  </div>
+
+  <section class="main-content" >
+  <div class="intro">
+    <h2>About Bairatwa</h2>
+    <p>A typical Indian village, like Bairatwa, is often surrounded by lush green fields, 
+        with farming being the main source of livelihood. The air is fresh, and life moves 
+        at a slower, more peaceful pace compared to busy cities. Houses are usually simple, 
+        some made of bricks and others with mud walls and thatched roofs. People know each other well, 
+        and there is a strong sense of community where neighbors help one another in times of need. 
+        Festivals, fairs, and traditional rituals are celebrated with great enthusiasm, bringing the whole village together. 
+        Despite limited modern facilities, such villages are rich in culture, values, and the beauty of nature, 
+        offering a glimpse of India’s heart and soul.</p>
+   </div>
+  <div class="main-image">
+    <img src="Images/Bairatwa2.jpg" alt="Lt. Mohit Kumar Mishra">
+  </div>
+  </section>
+
+    
+
+  <div class="map-container">
+    <div class="map">
+    <h2>Location</h2>
+      <iframe 
+        src="https://www.google.com/maps?q=Bairatwa,+Gaunaha,+Bihar&output=embed"
+        width="100%" 
+        height="350" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy">
+      </iframe>
+    </div>
+
+  <script>
+    let currentIndex = 0;
+    const slider = document.getElementById("slider");
+    const images = slider.children;
+    const totalImages = images.length;
+    const dots = document.querySelectorAll('.slider-dot');
+    let autoSlideInterval;
+
+    function updateSlider() {
+      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalImages;
+      updateSlider();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+      updateSlider();
+    }
+
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextSlide, 3000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('.left-arrow').addEventListener('click', () => {
+        clearInterval(autoSlideInterval);
+        prevSlide();
+        startAutoSlide();
+      });
+
+      document.querySelector('.right-arrow').addEventListener('click', () => {
+        clearInterval(autoSlideInterval);
+        nextSlide();
+        startAutoSlide();
+      });
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          clearInterval(autoSlideInterval);
+          currentIndex = index;
+          updateSlider();
+          startAutoSlide();
+        });
+      });
+
+      slider.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+      slider.addEventListener('mouseleave', startAutoSlide);
+
+      updateSlider();
+      startAutoSlide();
+    });
+  </script>
+   <button id="topBtn" title="Go to top">↑</button>
+<script>
+  const topBtn = document.getElementById("topBtn");
+
+  window.onscroll = function () {
+    if (window.scrollY > 200) {
+      topBtn.style.display = "block";
+    } else {
+      topBtn.style.display = "none";
+    }
+  };
+
+  topBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  </script>
+</body>
+</html>

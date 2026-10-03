@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vibrant Bairatwa</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style2.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  
+  <style>
+.modal3 {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9);
+}
+.modal3-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+.close3 {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.close3:hover {
+  color: #ff4444;
+}
+ /* ------------------------------
+   Map buttons + Gallery - Revised
+   ------------------------------ */
+
+/* Button container (centered on desktop and mobile, no floats/absolute) */
+.map-btn-container {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;           /* allow buttons to wrap on small screens */
+  z-index: 2;                /* keep buttons above background but below modals */
+  position: relative;        /* create stacking context without absolute positioning */
+}
+
+/* Individual button */
+.map-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  background-color: #2d4373;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.22s ease, transform 0.12s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Hover / active state */
+.map-btn:hover,
+.map-btn:focus {
+  background-color: green; /* slightly darker blue for accessibility */
+  transform: translateY(-2px);
+  outline: none;
+}
+
+/* Defensive: ensure buttons don't overlap following text */
+.map-btn-container + .Tourist-section-description,
+.map-btn-container + p {
+  clear: both;
+}
+
+/* ------- Modal overlay ------- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;                   /* shorthand for left/top/right/bottom: 0 */
+  background: rgba(0,0,0,0.8);
+  overflow-y: auto;           /* allow scrolling if gallery taller than viewport */
+  -webkit-overflow-scrolling: touch;
+  padding: 40px 16px;         /* breathing room on small screens */
+  box-sizing: border-box;
+}
+
+/* Close button (modal) */
+.modal .close {
+  position: fixed;            /* keep the close button visible while scrolling */
+  top: 18px;
+  right: 20px;
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10001;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  padding: 4px;
+}
+
+/* ------- Gallery grid centered in modal ------- */
+/* Use a responsive grid that adapts columns with max-width container */
+.modal .gallery-grid {
+  width: 100%;
+  max-width: 800px;
+  margin: 80px auto 40px;    /* center vertically a bit below top to show close btn */
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, 1fr); /* default: 2 columns */
+  align-items: stretch;
+  box-sizing: border-box;
+  padding: 0 8px;
+}
+
+/* Image container: responsive, uses aspect-ratio for consistent sizing */
+.img-container {
+  width: 100%;
+  aspect-ratio: 4 / 3;       /* keeps a nice rectangular tile */
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  background: #111;
+  display: block;
+}
+
+/* Images inside gallery */
+.gallery-grid img,
+.img-container img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.28s ease;
+  cursor: pointer;
+}
+
+/* Hover/active zoom */
+.gallery-grid img:hover,
+.img-container img:hover {
+  transform: scale(1.04);
+}
+
+/* Limit maximum displayed image size on large screens (keeps layout tidy) */
+.gallery-grid img {
+  max-height: 60vh;
+}
+
+/* Full screen image modal content */
+.full-screen-img {
+  display: block;
+  margin: 0 auto;
+  max-width: 95%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* ----------------
+   Responsive rules
+   ---------------- */
+
+/* Small tablets and large phones: keep 2 columns but smaller gaps */
+@media (max-width: 900px) {
+  .modal .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 68px;
+  }
+}
+
+/* Phones: stack buttons vertically and gallery becomes single column */
+@media (max-width: 600px) {
+  .map-btn-container {
+    justify-content: center;
+    gap: 10px;
+    padding: 0 8px;
+  }
+
+  /* Make buttons full-width and easy to tap */
+  .map-btn {
+    flex: 1 1 100%;
+    min-width: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 14px;
+    font-size: 15px;
+  }
+
+  /* Stack the gallery into a single column */
+  .modal .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 60px auto 24px;
+    padding: 0 6px;
+  }
+
+  .img-container {
+    aspect-ratio: 3 / 2;
+  }
+
+  /* Ensure modal close button remains reachable */
+  .modal .close {
+    top: 12px;
+    right: 14px;
+    font-size: 32px;
+  }
+}
+
+/* Very small phones: reduce padding so nothing overlaps */
+@media (max-width: 380px) {
+  .modal {
+    padding: 20px 8px;
+  }
+  .map-btn {
+    font-size: 14px;
+    padding: 9px 12px;
+  }
+  .img-container {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Accessibility: focus styles for keyboard users */
+.map-btn:focus {
+  outline: 3px solid rgba(45,67,115,0.28);
+  outline-offset: 2px;
+}
+
+/* Defensive resets to avoid interference from other global rules */
+.modal .gallery-grid,
+.modal .img-container,
+.modal .img-container img {
+  box-sizing: border-box;
+}
+
+/* End of block */
+/* Put this at the end of your stylesheet so it overrides earlier rules */
+
+/* Ensure buttons wrap and do not overlap content on phones */
+@media (max-width: 600px) {
+  .map-btn-container {
+    display: flex !important;
+    flex-direction: column !important;   /* stack buttons vertically */
+    gap: 10px !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    margin-top: 12px !important;
+    margin-bottom: 14px !important;     /* push paragraph down */
+    position: relative !important;      /* remove any absolute positioning effect */
+    z-index: 1 !important;
+  }
+
+  .map-btn {
+    width: 100% !important;             /* full-width tappable buttons */
+    box-sizing: border-box !important;
+    white-space: normal !important;     /* allow text wrap if needed */
+    padding: 12px 14px !important;
+    font-size: 16px !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    position: relative !important;
+  }
+
+  /* Defensive: ensure following paragraph is below the buttons */
+  .Tourist-section-description,
+  .Tourist-section-content p {
+    clear: both !important;
+    display: block !important;
+    margin-top: 8px !important;
+    position: relative !important;
+    z-index: 0 !important;
+  }
+}
+
+
+
+</style>
+</head>
+<body>
+
+  <!-- Header Section -->
+<header class="site-header">
+  <div class="header-container">
+    <div class="title-bar"> 
+    <h1>Vibrant Bairatwa</h1>
+  </div>
+  </div>
+</header>
+
+<nav class="navbar">
+  <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="About.html">About</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="Events.html">Events</a></li>
+     <li><a href="Tourist.html">Tourist places</a></li>
+     <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+ 
+<section class="Tourist-section">
+  <div class="Tourist-section-container">
+    <h3 class="Tourist-section-heading">Bhitiharwa Ashram</h3>
+    <div class="Tourist-section-content">
+    <div> 
+     <img src="Images/image5.jpg" alt="Tourist Place 1" class="enlargeable" >
+       <div class="map-btn-container">
+    <a href="https://www.google.com/maps?q=Bhitiharwa+Ashram,+Gaunaha,+West+Champaran,+Bihar+845455" 
+       target="_blank" 
+       class="map-btn">
+        Track Location
+    </a>
+    <a href="javascript:void(0)" 
+       onclick="openGallery('galleryModal1')" 
+       class="map-btn">
+        More Images
+    </a>
+    </div>
+   </div>
+      <p class="Tourist-section-description">
+        Bhitiharwa Ashram, located in Thana Gaunaha, West Champaran, Bihar (Pin-845455), is a historic place 
+        associated with Mahatma Gandhi’s Champaran Satyagraha of 1917. Gandhi chose this ashram as one of the 
+        centers for spreading education and creating social awareness among the oppressed farmers who were forced 
+        to cultivate indigo by the British. It also served as a base for training volunteers in cleanliness, education, 
+        and self-reliance. Today, the ashram stands as a symbol of India’s freedom struggle and attracts tourists and history 
+        enthusiasts who wish to connect with Gandhi’s legacy and Champaran’s historic role in India’s independence movement.
+      </p>
+    </div>
+  </div>
+
+  <div id="galleryModal1" class="modal">
+  <span class="close" onclick="closeGallery('galleryModal1')">&times;</span>
+ <div class="gallery-grid">
+  <div class="img-container"> 
+    <img src="Images/Ashram1.jpg" onclick="openFullScreen('fullScreenModal1', this)">
+  </div>
+  <div class="img-container"> 
+    <img src="Images/Ashram2.jpg" onclick="openFullScreen('fullScreenModal1', this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Ashram3.jpg" onclick="openFullScreen('fullScreenModal1', this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Ashram4.jpg" onclick="openFullScreen('fullScreenModal1', this)">
+  </div>
+</div>
+ </div>
+
+<!-- Full Screen Image Modal -->
+<div id="fullScreenModal1" class="modal">
+  <span class="close" onclick="closeFullScreen('fullScreenModal1')">&times;</span>
+  <img id="fullScreenImg" class="full-screen-img">
+</div>
+</section>
+
+<section class="Tourist-section">
+  <div class="Tourist-section-container">
+    <h3 class="Tourist-section-heading">Gandhi Ashram Park</h3>
+    <div class="Tourist-section-content">
+    <div> 
+     <img src="Images/Park2.jpg" alt="Tourist Place 1" class="enlargeable" >
+       <div class="map-btn-container">
+    <a href="https://www.google.com/maps?q=Park,+Bhitiharwa+Ashram,+West+Champaran,+Bihar"
+       target="_blank" 
+       class="map-btn">
+        Track Location
+    </a>
+    <a href="javascript:void(0)" 
+       onclick="openGallery('galleryModal7')" 
+       class="map-btn">
+        More Images
+    </a>
+    </div>
+   </div>
+      <p class="Tourist-section-description">
+         Park at Bhithiharwa Ashram in West Champaran, Bihar, is a peaceful spot that holds both 
+         natural beauty and historical value. Surrounded by greenery, the park provides a calm environment 
+         for visitors to relax and connect with nature. The Ashram itself is linked to Mahatma Gandhi’s stay 
+         during the freedom movement, making the place culturally and historically significant. People often 
+         visit this park not only for leisure but also to reflect on the values of simplicity and truth that Gandhi promoted. 
+         With its blend of history, spirituality, and natural charm, the park at Bhithiharwa Ashram is an inspiring destination 
+         for locals and tourists alike.
+      </p>
+    </div>
+  </div>
+  
+ <div id="galleryModal7" class="modal">
+  <span class="close" onclick="closeGallery('galleryModal7')">&times;</span>
+ <div class="gallery-grid">
+  <div class="img-container"> 
+    <img src="Images/Park1.jpg" onclick="openFullScreen('fullScreenModal7', this)">
+  </div>
+  <div class="img-container"> 
+    <img src="Images/Park3.jpg" onclick="openFullScreen('fullScreenModal7', this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Park4.jpg" onclick="openFullScreen('fullScreenModal7', this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Park5.jpg" onclick="openFullScreen('fullScreenModal7', this)">
+  </div>
+</div>
+ </div>
+
+<!-- Full Screen Image Modal -->
+<div id="fullScreenModal7" class="modal">
+  <span class="close" onclick="closeFullScreen('fullScreenModal7')">&times;</span>
+  <img id="fullScreenImg" class="full-screen-img">
+</div>
+</section>
+
+<section class="Tourist-section">
+  <div class="Tourist-section-container">
+    <h3 class="Tourist-section-heading">Bhikhna Thori</h3>
+    <div class="Tourist-section-content">
+        <div> 
+     <img src="Images/image6.jpg" alt="Tourist Place 1" class="enlargeable" >
+       <div class="map-btn-container">
+    <a href="https://www.google.com/maps?q=27.3333,84.6140" 
+   target="_blank" 
+   class="map-btn">
+    Track Location
+   </a>
+    <a href="javascript:void(0)" 
+       onclick="openGallery('galleryModal2')" 
+       class="map-btn">
+        More Images
+    </a>
+   </div>
+  </div>
+      <p class="Tourist-section-description">
+        Thori, also known as Bhikhna Thori, is a beautiful and lesser-known destination 
+        on the Bihar–Nepal border in West Champaran. The place is surrounded by dense forests, 
+        gentle hills, and calm rivers, creating a refreshing and peaceful atmosphere. On clear 
+        winter mornings, visitors can even catch a glimpse of the distant Himalayan ranges, which 
+        add a magical charm to the horizon. The region is home to attractions like Lakshman Jhula, 
+        Sita Gufa, and lakeside spots where travelers can relax amidst nature. Its untouched beauty, 
+        serene environment, and cultural significance make Bakna Thori a hidden treasure for tourists, 
+        adventure seekers, and history lovers alike.
+      </p>
+    </div>
+  </div>
+   <div id="galleryModal2" class="modal">
+  <span class="close" onclick="closeGallery('galleryModal2')">&times;</span>
+ <div class="gallery-grid">
+  <div class="img-container"> 
+    <img src="Images/Thori1.jpg" onclick="openFullScreen('fullScreenModal2',this)">
+  </div>
+  <div class="img-container"> 
+    <img src="Images/Thori2.jpg" onclick="openFullScreen('fullScreenModal2',this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Thori3.jpg" onclick="openFullScreen('fullScreenModal2',this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Thori4.jpg" onclick="openFullScreen('fullScreenModal2',this)">
+  </div>
+</div>
+ </div>
+
+<!-- Full Screen Image Modal -->
+<div id="fullScreenModal2" class="modal">
+  <span class="close" onclick="closeFullScreen('fullScreenModal2')">&times;</span>
+  <img id="fullScreenImg" class="full-screen-img">
+</div>
+</section>
+
+<section class="Tourist-section">
+  <div class="Tourist-section-container">
+    <h3 class="Tourist-section-heading">Jungle Safari</h3>
+    <div class="Tourist-section-content">
+        <div> 
+     <img src="Images/Safari1.jpg" alt="Tourist Place 1" class="enlargeable" >
+       <div class="map-btn-container">
+   <a href="https://www.google.com/maps?q=8G5H+5MR,+Maguraha,+Bihar+845455" 
+   target="_blank" 
+   class="map-btn">
+    Track Location
+    </a>
+     <a href="javascript:void(0)" 
+       onclick="openGallery('galleryModal6')" 
+       class="map-btn">
+        More Images
+    </a>
+   </div>
+  </div>
+      <p class="Tourist-section-description">
+         The Sahodra Mela in West Champaran, Bihar, is a famous cultural and religious fair held every year during Chaitra Navratri. 
+         The fair centers around the Subhadra Mata Temple, where devotees from Bihar, Uttar Pradesh, and Nepal gather to 
+         offer prayers. It is especially important for the Tharu community, who come together for worship, cultural exchange, 
+         and social discussions. The mela also features swings, rides, and shops, creating a festive atmosphere. Every year, 
+         lakhs of devotees attend, making it a grand event. With strong security arrangements, the Sahodra Mela continues to represent 
+         faith, unity, and tradition in the region.<br>
+         <strong>Contact for Ride: 9973909350</strong>
+      </p>
+    </div>
+  </div>
+  <div id="galleryModal6" class="modal">
+  <span class="close" onclick="closeGallery('galleryModal6')">&times;</span>
+  <div class="gallery-grid">
+  <div class="img-container"> 
+    <img src="Images/Safari2.jpg" onclick="openFullScreen('fullScreenModal6',this)">
+  </div>
+  <div class="img-container"> 
+    <img src="Images/Safari3.jpg" onclick="openFullScreen('fullScreenModal6',this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Safari4.jpg" onclick="openFullScreen('fullScreenModal6',this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Safari5.jpg" onclick="openFullScreen('fullScreenModal6',this)">
+  </div>
+</div>
+</div>
+
+<!-- Full Screen Image Modal -->
+<div id="fullScreenModal6" class="modal">
+  <span class="close" onclick="closeFullScreen('fullScreenModal6')">&times;</span>
+  <img id="fullScreenImg" class="full-screen-img">
+</div>
+</section>
+ 
+<section class="Tourist-section">
+  <div class="Tourist-section-container">
+    <h3 class="Tourist-section-heading">Sofa Temple</h3>
+    <div class="Tourist-section-content">
+    <div> 
+     <img src="Images/Sofa2.jpg" alt="Tourist Place 1" class="enlargeable" >
+       <div class="map-btn-container">
+   <a href="https://www.google.com/maps?q=8H74+884,+Mahajogin,+Bihar+845102" 
+   target="_blank" 
+   class="map-btn">
+    Track Location
+    </a>
+     <a href="javascript:void(0)" 
+       onclick="openGallery('galleryModal3')" 
+       class="map-btn">
+        More Images
+    </a>
+   </div>
+  </div>
+      <p class="Tourist-section-description">
+        The Sofa Temple, or Sofa Shiva Temple, near Thori on the Bihar–Nepal 
+        border, is an ancient shrine built on a 70-foot mound surrounded by 
+        forests and rivers. Archaeological remains, including idols of Durga, 
+        Vishnu, and Shiva from the 9th–12th centuries, highlight its historic value. 
+        Local legend claims a hidden cave beneath the temple leads to Patal Lok, 
+        created by Lord Vishwakarma. During Sawan, devotees perform jalābhishek on the 
+        Shivling, praying for rain and prosperity. Protected by embankments, the temple 
+        remains a symbol of Champaran’s faith and heritage.
+      </p>
+    </div>
+  </div>
+     <div id="galleryModal3" class="modal">
+  <span class="close" onclick="closeGallery('galleryModal3')">&times;</span>
+ <div class="gallery-grid">
+  <div class="img-container"> 
+    <img src="Images/Sofa1.jpg" onclick="openFullScreen('fullScreenModal3',this)">
+  </div>
+  <div class="img-container"> 
+    <img src="Images/image7.jpg" onclick="openFullScreen('fullScreenModal3',this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Sofa3.jpg" onclick="openFullScreen('fullScreenModal3',this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Sofa4.jpg" onclick="openFullScreen('fullScreenModal3',this)">
+  </div>
+</div>
+</div>
+
+<!-- Full Screen Image Modal -->
+<div id="fullScreenModal3" class="modal">
+  <span class="close" onclick="closeFullScreen('fullScreenModal3')">&times;</span>
+  <img id="fullScreenImg" class="full-screen-img">
+</div>
+</section>
+
+<section class="Tourist-section">
+  <div class="Tourist-section-container">
+    <h3 class="Tourist-section-heading">Rampurva Ashokan Pillars</h3>
+    <div class="Tourist-section-content">
+        <div> 
+     <img src="Images/image8.jpg" alt="Tourist Place 1" class="enlargeable" >
+       <div class="map-btn-container">
+   <a a href="https://www.google.com/maps?q=7F9X+VPV,+Rampurwa,+Bihar+845455"
+   target="_blank" 
+   class="map-btn">
+    Track Location
+    </a>
+     <a href="javascript:void(0)" 
+       onclick="openGallery('galleryModal4')" 
+       class="map-btn">
+        More Images
+    </a>
+   </div>
+  </div>
+      <p class="Tourist-section-description">
+         Nestled in Rampurva village of West Champaran, Bihar—just shy of the Nepal border—stand 
+         the remains of two unique Ashokan Pillars, erected by Emperor Ashoka in the 3rd century BCE. 
+         One pillar bears a lion capital inscribed with the Major Pillar Edicts I–VI, while its twin, 
+         about 300 meters away, features an intricately crafted bull capital. Astoundingly, the lion 
+         capital now resides in Kolkata's Indian Museum and the bull in New Delhi’s Rashtrapati Bhavan. 
+         Tradition links the site to Buddha’s renunciation on the banks of the Harbora River, making it 
+         both a sacred Buddhist landmark and a testament to Mauryan artistry and legacy.
+      </p>
+    </div>
+  </div>
+  <div id="galleryModal4" class="modal">
+  <span class="close" onclick="closeGallery('galleryModal4')">&times;</span>
+ <div class="gallery-grid">
+  <div class="img-container"> 
+    <img src="Images/Pillar1.jpg" onclick="openFullScreen('fullScreenModal4',this)">
+  </div>
+  <div class="img-container"> 
+    <img src="Images/Pillar2.jpg" onclick="openFullScreen('fullScreenModal4',this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Pillar3.jpg" onclick="openFullScreen('fullScreenModal4',this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Pillar4.jpg" onclick="openFullScreen('fullScreenModal4',this)">
+  </div>
+</div>
+ </div>
+
+<!-- Full Screen Image Modal -->
+<div id="fullScreenModal4" class="modal">
+  <span class="close" onclick="closeFullScreen('fullScreenModal4')">&times;</span>
+  <img id="fullScreenImg" class="full-screen-img">
+</div>
+</section>
+
+<section class="Tourist-section">
+  <div class="Tourist-section-container">
+    <h3 class="Tourist-section-heading">Sahodra Mela</h3>
+    <div class="Tourist-section-content">
+        <div> 
+     <img src="Images/Sahodra3.jpg" alt="Tourist Place 1" class="enlargeable" >
+       <div class="map-btn-container">
+   <a href="https://www.google.com/maps?q=7HPG+9RJ,+Dewarh,+Bihar+845455"
+   target="_blank" 
+   class="map-btn">
+    Track Location
+    </a>
+     <a href="javascript:void(0)" 
+       onclick="openGallery('galleryModal5')" 
+       class="map-btn">
+        More Images
+    </a>
+   </div>
+  </div>
+      <p class="Tourist-section-description">
+         The Sahodra Mela in West Champaran, Bihar, is a famous cultural and religious fair held every year during Chaitra Navratri. 
+         The fair centers around the Subhadra Mata Temple, where devotees from Bihar, Uttar Pradesh, and Nepal gather to 
+         offer prayers. It is especially important for the Tharu community, who come together for worship, cultural exchange, 
+         and social discussions. The mela also features swings, rides, and shops, creating a festive atmosphere. Every year, 
+         lakhs of devotees attend, making it a grand event. With strong security arrangements, the Sahodra Mela continues to represent 
+         faith, unity, and tradition in the region.
+      </p>
+    </div>
+  </div>
+  <div id="galleryModal5" class="modal">
+  <span class="close" onclick="closeGallery('galleryModal5')">&times;</span>
+ <div class="gallery-grid">
+  <div class="img-container"> 
+    <img src="Images/Sahodra1.jpg" onclick="openFullScreen('fullScreenModal5',this)">
+  </div>
+  <div class="img-container"> 
+    <img src="Images/Sahodra2.jpg" onclick="openFullScreen('fullScreenModal5',this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Sahodra4.jpg" onclick="openFullScreen('fullScreenModal5',this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Sahodra5.jpg" onclick="openFullScreen('fullScreenModal5',this)">
+  </div>
+</div>
+</div>
+
+<!-- Full Screen Image Modal -->
+<div id="fullScreenModal5" class="modal">
+  <span class="close" onclick="closeFullScreen('fullScreenModal5')">&times;</span>
+  <img id="fullScreenImg" class="full-screen-img">
+</div>
+</section>
+
+<section class="Tourist-section">
+  <div class="Tourist-section-container">
+    <h3 class="Tourist-section-heading">Solar Plant</h3>
+    <div class="Tourist-section-content">
+    <div> 
+     <img src="Images/Solar1.jpg" alt="Tourist Place 1" class="enlargeable" >
+       <div class="map-btn-container">
+    <a href="https://www.google.com/maps?q=7F8W+F5G,+Rampurwa,+Bihar+845455"
+       target="_blank" 
+       class="map-btn">
+        Track Location
+    </a>
+    <a href="javascript:void(0)" 
+       onclick="openGallery('galleryModal8')" 
+       class="map-btn">
+        More Images
+    </a>
+    </div>
+   </div>
+      <p class="Tourist-section-description">
+          In Gaunaha, West Champaran, Bihar, a solar power plant has been set up to 
+          produce clean electricity. The project, started in 2017, generates about 5 megawatts 
+          of power, which is enough to light up many homes in nearby villages. This solar plant 
+          helps reduce the use of coal and diesel, making the environment cleaner. It also 
+          supports farmers and households by giving them access to reliable electricity. 
+          Bihar is working on many such solar projects, including rooftop panels and solar 
+          pumps. The plant in Gaunaha shows how renewable energy can improve life in rural areas 
+          and promote green living.
+      </p>
+    </div>
+  </div>
+  
+ <div id="galleryModal8" class="modal">
+  <span class="close" onclick="closeGallery('galleryModal8')">&times;</span>
+ <div class="gallery-grid">
+  <div class="img-container"> 
+    <img src="Images/Solar2.jpg" onclick="openFullScreen('fullScreenModal8', this)">
+  </div>
+  <div class="img-container"> 
+    <img src="Images/Solar3.jpg" onclick="openFullScreen('fullScreenModal8', this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Solar4.jpg" onclick="openFullScreen('fullScreenModal8', this)">
+  </div>
+  <div class="img-container">
+    <img src="Images/Solar5.jpg" onclick="openFullScreen('fullScreenModal8', this)">
+  </div>
+</div>
+ </div>
+
+<!-- Full Screen Image Modal -->
+<div id="fullScreenModal8" class="modal">
+  <span class="close" onclick="closeFullScreen('fullScreenModal8')">&times;</span>
+  <img id="fullScreenImg" class="full-screen-img">
+</div>
+</section>
+
+<!-- Lightbox Modal -->
+<div id="imgModal3" class="modal3">
+  <span class="close3">&times;</span>
+  <img class="modal3-content" id="modalImg3">
+</div>
+
+<script>
+  // Get modal elements
+  const modal = document.getElementById("imgModal3");
+  const modalImg = document.getElementById("modalImg3");
+  const closeBtn = document.getElementsByClassName("close3")[0];
+  // Select all images with "enlargeable" class
+  const images = document.querySelectorAll(".enlargeable");
+
+  // Add click event to each image
+  images.forEach(img => {
+    img.addEventListener("click", function() {
+      modal.style.display = "block";
+      modalImg.src = this.src;
+    });
+  });
+
+  // Close modal when "X" clicked
+  closeBtn.onclick = function() {
+    modal.style.display = "none";
+  }
+  
+function openGallery(modalId) {
+  document.getElementById(modalId).style.display = "block";
+}
+
+function closeGallery(modalId) {
+  document.getElementById(modalId).style.display = "none";
+}
+
+// Open full-screen modal dynamically
+function openFullScreen(modalId, imgElement) {
+  const modal = document.getElementById(modalId);
+  if (!modal) return; // Safety check
+
+  const modalImg = modal.querySelector('.full-screen-img');
+  if (!modalImg) return;
+
+  modalImg.src = imgElement.src;
+  modal.style.display = 'flex'; // show modal using flex
+}
+
+// Close full-screen modal dynamically
+function closeFullScreen(modalId) {
+  const modal = document.getElementById(modalId);
+  if (!modal) return;
+
+  modal.style.display = 'none';
+}
+</script>
+<button id="topBtn" title="Go to top">↑</button>
+<script>
+  const topBtn = document.getElementById("topBtn");
+
+  window.onscroll = function () {
+    if (window.scrollY > 200) {
+      topBtn.style.display = "block";
+    } else {
+      topBtn.style.display = "none";
+    }
+  };
+
+  topBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  </script>
+</body>
+</html>

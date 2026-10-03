@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vibrant Bairatwa</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style2.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+    body {
+  background:  #e6f2ff;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;   /* ⬅ Increased value */
+  padding-top: 80px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+}
+
+
+
+.modal-content {
+  display: block;
+  margin: auto;
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #fff;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+}
+@media (max-width: 600px) {
+  .about-section {
+    padding: 0.75rem;
+  }
+  .about-section h2 {
+    font-size: 1.25rem;
+  }
+  .video-container {
+    padding-bottom: 62%; /* slightly taller for mobile screens */
+  }
+}
+@media (max-width: 600px) {
+  .event-images {
+    display: grid;
+       grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+ 
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+<header class="site-header">
+  <div class="header-container">
+    <div class="title-bar"> 
+     
+    <h1>Vibrant Bairatwa</h1>
+  </div>
+  </div>
+</header>
+
+<nav class="navbar">
+  <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="About.html">About</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="Events.html">Events</a></li>
+     <li><a href="Tourist.html">Tourist places</a></li>
+     <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="about" class="about-section">
+  <h2>About</h2>
+  <div class="video-container">
+    <video controls>
+      <source src="videos/Video1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</section>
+
+<section class="about-section">
+  <div class="container">
+    <h2 class="section-title">About Bairatwa</h2>
+    <p>
+      Bairatwa is a beautiful and peaceful village located in Bihar, India. 
+      It is not just a place of houses and fields, but a home filled with traditions, 
+      culture, and a strong sense of togetherness. The people of Bairatwa live a simple 
+      life, close to nature, and value honesty, respect, and community.
+    </p>
+
+    <h3>The Land and Nature</h3>
+  <div class="event-images">
+    <img src="Images/image10.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/image29.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/image12.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/image26.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+    <p>
+      Bairatwa is surrounded by green fields, tall trees, and open skies. Farming is the 
+      main occupation of the villagers, and agriculture gives life to the land. Rice, 
+      wheat, maize, and seasonal vegetables are commonly grown here. During monsoon, the 
+      fields look fresh and lively, and in winter, the village is covered with a natural 
+      calmness. Birds, cattle, and fresh air make Bairatwa a place where nature and people 
+      live side by side.
+    </p>
+
+    <h3>People and Lifestyle</h3>
+    <div class="event-images">
+    <img src="Images/image1.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/image23.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/image15.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/image22.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)" >
+  </div>
+    <p>
+      The people of Bairatwa are hardworking, kind, and friendly. Neighbors help each 
+      other in every need, whether it is farming work, weddings, or festivals. Most 
+      families follow traditional values, and elders are respected in every home. Life 
+      here is simple, without the rush of cities, but full of peace and harmony.
+    </p>
+    <p>
+      Children of the village are active, curious, and playful. They attend schools 
+      nearby and dream of building bright futures while staying connected to their roots. 
+      In the evenings, villagers gather in common places to talk, share news, or enjoy 
+      folk songs and stories.
+    </p>
+
+    <h3>Festivals and Celebrations</h3>
+    <div class="event-images">
+    <img src="Images/Diwali1.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/Diwali2.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/Diwali3.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/Diwali4.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+    <p>
+      Bairatwa is rich in culture and festivals. People here celebrate Holi, Diwali, 
+      Chhath Puja, and other Indian festivals with great joy. A special identity of 
+      Bairatwa is the celebration of the <b>Jhaanda Mela</b>, where villagers gather to hoist 
+      a sacred flag in devotion to Lord Hanuman. This event brings everyone together, 
+      creating unity and happiness across the village. During such occasions, folk music, 
+      cultural programs, and fairs make the village lively and colorful.
+    </p>
+
+    <h3>Unity and Togetherness</h3>
+    <div class="event-images">
+    <img src="Images/image10.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/image29.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/image12.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/image26.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+    <p>
+      One of the strongest qualities of Bairatwa is the unity among its people. No 
+      matter what religion, caste, or background, the villagers stand together in times 
+      of need. Weddings, social functions, and festivals are celebrated as a community, 
+      where everyone takes part equally. This spirit of togetherness makes Bairatwa a 
+      true family village.
+    </p>
+
+    <h3>Vision for the Future</h3>
+    <div class="event-images">
+    <img src="Images/image10.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/image29.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/image12.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/image26.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+    <p>
+      Even though Bairatwa is deeply connected to its traditions, it is also moving 
+      forward with education and modern development. The younger generation is focusing 
+      on studies, technology, and new opportunities. Many people from Bairatwa work in 
+      cities or abroad, but their hearts always remain connected to the village. With 
+      progress in education, healthcare, and connectivity, Bairatwa is stepping into a 
+      brighter future while keeping its cultural identity alive.
+    </p>
+
+    <h3>Final Words</h3>
+    <div class="event-images">
+    <img src="Images/image10.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/image29.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/image12.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/image26.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+    <p>
+      Bairatwa is more than just a village – it is a place of love, tradition, and unity. 
+      It teaches us the value of simple living, respect for nature, and the importance of 
+      community life. Anyone who visits Bairatwa will feel the warmth of its people and 
+      the beauty of its land.
+    </p>
+    <p>
+      This website is a small effort to share the story of our village with the world and 
+      to keep our heritage alive for future generations.
+    </p>
+  </div>
+</section>
+<div id="imgModal" class="modal" onclick="closeImage()">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="fullImg">
+</div>
+
+
+<div id="imgModal" class="modal" onclick="closeImage()">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="fullImg">
+</div>
+
+<script>
+  function openImage(img) {
+  document.getElementById("imgModal").style.display = "block";
+  document.getElementById("fullImg").src = img.src;
+}
+
+function closeImage() {
+  document.getElementById("imgModal").style.display = "none";
+}
+</script>
+<button id="topBtn" title="Go to top">↑</button>
+<script>
+  const topBtn = document.getElementById("topBtn");
+
+  window.onscroll = function () {
+    if (window.scrollY > 200) {
+      topBtn.style.display = "block";
+    } else {
+      topBtn.style.display = "none";
+    }
+  };
+
+  topBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vibrant Bairatwa</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style2.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    /* Prevent body from moving left-right on mobile */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ensure images and containers don’t exceed width */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.event-container {
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+    body {
+  background:  #e6f2ff;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;   /* ⬅ Increased value */
+  padding-top: 80px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+}
+
+
+
+.modal-content {
+  display: block;
+  margin: auto;
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #fff;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+<header class="site-header">
+  <div class="header-container">
+    <div class="title-bar"> 
+     
+    <h1>Vibrant Bairatwa</h1>
+  </div>
+  </div>
+</header>
+
+<nav class="navbar">
+  <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="About.html">About</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="Events.html">Events</a></li>
+     <li><a href="Tourist.html">Tourist places</a></li>
+     <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="event-container">
+  <h2>Makar Sankranti</h2>
+  
+  <div class="event-images">
+    <img src="Images/Diwali1.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/Diwali2.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/Diwali3.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/Diwali4.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+  
+  <p class="event-desc">
+      In the village of Bairatwa, Makar Sankranti is celebrated with great enthusiasm 
+      and devotion. On this day, people wake up early, take holy baths, and offer 
+      prayers to the Sun God for prosperity and good harvests. The sky above the village 
+      fills with colorful kites as children and adults joyfully compete, shouting with 
+      excitement when their kites soar high. Women prepare traditional sweets like 
+      tilkut and chikkis, made of sesame and jaggery, symbolizing warmth and harmony. 
+      The whole community gathers together, sharing food, laughter, and blessings. In 
+      Bairatwa, Makar Sankranti becomes a vibrant festival of unity, tradition, and 
+      happiness.
+  </p>
+</section>
+
+<section class="event-container">
+  <h2>Republic Day</h2>
+  
+  <div class="event-images">
+    <img src="Images/Diwali1.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/Diwali2.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/Diwali3.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/Diwali4.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+  
+  <p class="event-desc">
+        In राजकीय प्राथमिक विद्यालय बैरटवा, Republic Day is celebrated with great 
+        pride and patriotism. Early in the morning, teachers and students gather 
+        in the school courtyard, decorated with tricolor flags and flowers. The 
+        celebration begins with the hoisting of the national flag, followed by the 
+        singing of the national anthem in unison. Students present speeches, 
+        patriotic songs, and cultural performances that honor the sacrifices of 
+        freedom fighters. Teachers inspire the children with words about the 
+        importance of the Constitution and democracy. Sweets are distributed to 
+        all, filling the day with joy. In बैरटवा, Republic Day unites the school 
+        in respect and patriotism.
+ </p>
+</section>
+
+<section class="event-container">
+  <h2>Saraswati Puja</h2>
+  
+  <div class="event-images">
+    <img src="Images/Diwali1.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/Diwali2.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/Diwali3.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/Diwali4.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+  
+  <p class="event-desc">
+       In the village of Bairatwa, Saraswati Puja is celebrated with deep devotion 
+       and cultural charm. On this day, villagers beautifully decorate idols of 
+       Goddess Saraswati, the goddess of wisdom, learning, and arts, with flowers 
+       and traditional attire. Students and children place their books, pens, and 
+       instruments before the deity, seeking her blessings for knowledge and success. 
+       The village schools and community halls become centers of prayer, bhajans, and 
+       cultural programs. Women prepare festive dishes and share prasad with neighbors, 
+       strengthening bonds of togetherness. In Bairatwa, Saraswati Puja is not only a 
+       religious event but also a celebration of learning and culture.
+
+  </p>
+</section>
+
+<section class="event-container">
+  <h2>Holi</h2>
+  
+  <div class="event-images">
+    <img src="Images/Diwali1.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/Diwali2.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/Diwali3.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/Diwali4.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+  
+  <p class="event-desc">
+       In the small village of Bairatwa, celebrations bring people together in a 
+       spirit of joy and unity. Festivals are marked with colorful decorations, 
+       traditional songs, and vibrant dances that reflect the rich culture of the
+      village. During special occasions, the entire community gathers in the village 
+      square, sharing homemade sweets and delicacies prepared with love. Children 
+      play traditional games, while elders narrate stories of heritage and values. 
+      The sound of drums and folk instruments fills the air, creating a festive 
+      atmosphere. In Bairatwa, every celebration becomes a symbol of togetherness, 
+      reminding everyone of their shared traditions and cultural pride.
+
+  </p>
+</section>
+
+<section class="event-container">
+  <h2>Jhaanda Mela</h2>
+  
+  <div class="event-images">
+    <img src="Images/Diwali1.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/Diwali2.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/Diwali3.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/Diwali4.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+  
+  <p class="event-desc">
+      In our village Bairatwa, the annual Jhaanda Mela is celebrated with great devotion 
+      and community spirit. Villagers gather to hoist a sacred flag, symbolizing faith, 
+      unity, and the blessings of Lord Hanuman. The event begins with prayers and 
+      traditional rituals, followed by vibrant cultural performances, folk songs, and 
+      fairs that attract people from nearby villages. For Bairatwa, the Jhaanda Mela is 
+      not just a religious occasion but also a festival of togetherness, where 
+      differences are set aside, and everyone participates with joy. It reflects the 
+      village’s cultural heritage and strengthens the bond among its people.
+  </p>
+</section>
+
+<section class="event-container">
+  <h2>Independence Day</h2>
+  
+  <div class="event-images">
+    <img src="Images/Diwali1.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/Diwali2.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/Diwali3.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/Diwali4.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+  
+  <p class="event-desc">
+         In राजकीय प्राथमिक विद्यालय बैरटवा, Independence Day is celebrated with 
+         heartfelt enthusiasm and patriotic spirit. The school campus is decorated 
+         with tricolor flags, flowers, and handmade charts prepared by the students. 
+         The program begins with the hoisting of the national flag by the head 
+         teacher, followed by the singing of the national anthem in a proud and 
+         united voice. Students perform patriotic songs, speeches, and small skits 
+         that remind everyone of the struggles and sacrifices made for freedom. 
+         Teachers encourage students to value independence and serve the nation 
+         responsibly. At the end, sweets are distributed, making the day joyful 
+         and memorable.
+  </p>
+</section>
+
+<section class="event-container">
+  <h2>Durga Puja</h2>
+  
+  <div class="event-images">
+    <img src="Images/Diwali1.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/Diwali2.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/Diwali3.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/Diwali4.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+  
+  <p class="event-desc">
+         In the village of Bairatwa, Durga Puja is celebrated with devotion and joy, 
+         especially within homes. Families set up small idols or pictures of Goddess 
+         Durga, decorating the space with flowers, incense, and traditional lamps. 
+         Each morning and evening, prayers and aarti are performed, filling the 
+         houses with divine chants and the fragrance of incense. Women prepare 
+         festive dishes and offer bhog to the goddess before sharing it with family 
+         and neighbors. Children enjoy the celebrations, wearing new clothes and 
+         visiting relatives. In Bairatwa, Durga Puja at home is not just worship 
+         but also a time of togetherness, blessings, and cultural pride.
+
+  </p>
+</section>
+
+<section class="event-container">
+  <h2>Diwali</h2>
+  
+  <div class="event-images">
+    <img src="Images/Diwali1.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/Diwali2.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/Diwali3.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/Diwali4.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+  
+  <p class="event-desc">
+     In our village Bairatwa, Diwali is celebrated with great joy and togetherness. 
+     A few days before the festival, houses are cleaned, decorated with mud rangolis, 
+     and lit with oil lamps made of clay. On Diwali night, the entire village glows as 
+     rows of diyas brighten every home. Families gather to worship Goddess Lakshmi, 
+     offering prayers for prosperity and happiness. Traditional sweets are prepared 
+     and shared with neighbors, while children burst crackers in open fields. The 
+     celebration is simple yet deeply rooted in tradition, reflecting unity and warmth. 
+     In Bairatwa, Diwali truly becomes a festival of light and harmony.
+  </p>
+</section>
+
+<section class="event-container">
+  <h2>Rasiyao-Roti</h2>
+  
+  <div class="event-images">
+    <img src="Images/Diwali1.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/Diwali2.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/Diwali3.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/Diwali4.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+  
+  <p class="event-desc">
+          In the village of Bairatwa, **Rasiyao-Roti** is celebrated with warmth, 
+          devotion, and togetherness. On this special day of Chhath Puja, villagers 
+          prepare *rasiyao*, a sweet jaggery dish, along with simple handmade rotis 
+          as prasad. Families first offer it to the deity, seeking blessings, and 
+          then share it with neighbors and relatives. People gather in each other’s 
+          homes, exchanging prasad with love and respect, which strengthens their 
+          bonds of unity. The entire village feels like one big family, as laughter, 
+          devotion, and the fragrance of jaggery fill the air. In Bairatwa, 
+          Rasiyao-Roti becomes a symbol of faith, harmony, and community spirit.
+   </p>
+</section>
+
+<section class="event-container">
+  <h2>Chhath Puja</h2>
+  
+  <div class="event-images">
+    <img src="Images/Chhath1.jpg" alt="Chhath Puja Image 1" onclick="openImage(this)">
+    <img src="Images/Chhath2.jpg" alt="Chhath Puja Image 2" onclick="openImage(this)">
+    <img src="Images/Chhath3.jpg" alt="Chhath Puja Image 3" onclick="openImage(this)">
+    <img src="Images/Chhath4.jpg" alt="Chhath Puja Image 4" onclick="openImage(this)">
+  </div>
+  
+  <p class="event-desc">
+    Chhath Puja is one of the most important festivals celebrated in our village.
+    Dedicated to the Sun God, people gather near rivers and ponds to offer prayers.
+    Women observe fasts, sing devotional songs, and perform rituals for health,
+    prosperity, and well-being of their families. The festival creates a beautiful
+    atmosphere of unity, devotion, and cultural pride in our community.
+  </p>
+</section>
+
+<!-- Fullscreen Modal -->
+<div id="imgModal" class="modal" onclick="closeImage()">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="fullImg">
+</div>
+
+
+<div id="imgModal" class="modal" onclick="closeImage()">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="fullImg">
+</div>
+
+<script>
+  function openImage(img) {
+  document.getElementById("imgModal").style.display = "block";
+  document.getElementById("fullImg").src = img.src;
+}
+
+function closeImage() {
+  document.getElementById("imgModal").style.display = "none";
+}
+</script>
+<button id="topBtn" title="Go to top">↑</button>
+<script>
+  const topBtn = document.getElementById("topBtn");
+
+  window.onscroll = function () {
+    if (window.scrollY > 200) {
+      topBtn.style.display = "block";
+    } else {
+      topBtn.style.display = "none";
+    }
+  };
+
+  topBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  </script>
+</body>
+</html>
